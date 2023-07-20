@@ -1,26 +1,30 @@
 from fastapi import FastAPI
 from mangum import Mangum
+from random import choice
 
 app = FastAPI()
 
-# TODO: Implement my logic here to handle the requests from Battlesnake
-
 @app.get("/")
 def read_root():
-    return {"Test Message": "Lucas Calcada"}
+    # Snake customization
+    return {
+      "apiversion": "1",
+      "author": "LucasCalcada",
+      "color": "#950aff",
+      "head": "caffeine",
+      "tail": "rbc-necktie",
+      "version": "0.0.1-beta"
+    }
 
 
-@app.get("/items/{item_id}")
-def read_item(item_id: int):
-    return {"item_id": item_id}
-
-@app.post("/create_item")
-def create_item(request: dict):
-    item_id = request.get("item_id")
-    name = request.get("name")
-
-    return {"item_id": item_id,
-            "name": name}   
-
+# Random movements tests
+MOVES = ['up', 'down', 'left', 'right']
+@app.post("/move")
+def move(req: dict):
+    dir = choice(MOVES)
+    return {
+        "move": dir,
+        "shout": f"moving {dir}!"
+    }
 
 handler = Mangum(app, lifespan="off")

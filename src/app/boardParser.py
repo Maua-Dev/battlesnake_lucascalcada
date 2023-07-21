@@ -17,7 +17,6 @@ class Coord:
 class Board:
     def __init__(self, boardData, playerSnake):
         self.__boardData = boardData
-        self.__playerSnake = playerSnake
         head = playerSnake["head"]
         self.headPos = Coord(head['x'],head['y'])
         self.food = self.GetFoodCoords()
@@ -26,21 +25,21 @@ class Board:
 
     # Find all snake tiles
     def GetSnakes(self) -> list:
-        tiles = []
+        snakeTiles = []
         for snake in self.__boardData['snakes']:
             #if snake['id'] == self.__playerId: continue
             for tile in snake['body']:
                 tile = Coord(tile['x'],tile['y'])
-                tiles.append(tile)
-        return tiles
+                snakeTiles.append(tile)
+        return snakeTiles
 
     # Find all food tiles
     def GetFoodCoords(self) -> list:
-        food = []
+        foodCoords = []
         for food in self.__boardData['food']:
             coord = Coord(food['x'], food['y'])
-            food.append(coord)
-        return food
+            foodCoords.append(coord)
+        return foodCoords
 
     def GenBoardArr(self) -> list:
         # 0: safe tiles

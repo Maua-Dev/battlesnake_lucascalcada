@@ -1,7 +1,8 @@
 from fastapi import FastAPI
 from mangum import Mangum
 from random import choice
-from .boardParser import Board, Coord
+from .objects.boardParser import Board
+from .objects.coordObj import Coord
 
 app = FastAPI()
 
@@ -35,7 +36,7 @@ def move(req: dict):
     )
     board = Board(req['board'],playerSnake)
     dirs = board.FindSafeTiles()
-    dir = choice(dirs)
+    dir = choice(dirs) if len(dirs) > 0 else 'up'
     return {
         'move': dir,
         'shout': f'moving {dir}!'

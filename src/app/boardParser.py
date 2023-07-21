@@ -1,4 +1,18 @@
-from utils import Coord
+from dataclasses import dataclass
+
+@dataclass
+class Coord:
+    x: int
+    y: int
+
+    def Up(self): 
+        return Coord(self.x, self.y + 1)
+    def Down(self): 
+        return Coord(self.x, self.y - 1)
+    def Left(self): 
+        return Coord(self.x - 1, self.y)
+    def Right(self): 
+        return Coord(self.x + 1, self.y)
 
 class Board:
     def __init__(self, boardData, playerSnake):
@@ -43,6 +57,9 @@ class Board:
             board[snakeTile.y][snakeTile.x] = 1
 
         return board
+
+    def GetTile(self, coord: Coord):
+        return self.boardObj[coord.y][coord.x]
     
     # TODO: there's a better way to do this
     def FindSafeTiles(self):

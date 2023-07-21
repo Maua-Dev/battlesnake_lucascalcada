@@ -1,8 +1,7 @@
 from fastapi import FastAPI
 from mangum import Mangum
 from random import choice
-from .boardParser import Board
-from .utils import Coord
+from .boardParser import Board, Coord
 
 app = FastAPI()
 

@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from mangum import Mangum
 from random import choice
-from .objects.boardParser import Board
+from .objects.boardParser import Parser
 from .objects.coordObj import Coord
 
 app = FastAPI()
@@ -30,13 +30,11 @@ def end():
 @app.post('/move')
 def move(req: dict):
     playerSnake = req['you']
-    headPos = Coord(
-        playerSnake['head']['x'],
-        playerSnake['head']['y']
-    )
-    board = Board(req['board'],playerSnake)
-    dirs = board.FindSafeTiles()
+    boardParser = Parser(req['board'],playerSnake)
+
+    dirs = boardParser.FindSafeTiles()
     dir = choice(dirs) if len(dirs) > 0 else 'up'
+
     return {
         'move': dir,
         'shout': f'moving {dir}!'

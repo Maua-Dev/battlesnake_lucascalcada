@@ -4,7 +4,7 @@ class Coord:
         self.y = y
 
     def Up(self):
-        if(self.y < 11): 
+        if(self.y < 10): 
             return Coord(self.x, self.y + 1)
 
     def Down(self):
@@ -16,7 +16,7 @@ class Coord:
             return Coord(self.x - 1, self.y)
 
     def Right(self):
-        if(self.x < 11):
+        if(self.x < 10):
             return Coord(self.x + 1, self.y)
 
     def Sides(self) -> list:

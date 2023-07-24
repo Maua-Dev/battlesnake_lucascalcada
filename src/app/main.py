@@ -1,6 +1,5 @@
 from fastapi import FastAPI
 from mangum import Mangum
-from random import choice
 from .objects.boardParser import Parser
 from .objects.coordObj import Coord
 
@@ -21,7 +20,7 @@ def read_root():
 @app.post('/start')
 def start():
     print('='* 30)
-    print('NEW GAMES STARTED')
+    print('NEW GAME STARTED')
     print('='* 30)
 
 @app.post('/end')
@@ -34,13 +33,14 @@ def move(req: dict):
     playerSnake = req['you']
     boardParser = Parser(req['board'],playerSnake)
 
-    dirs = boardParser.FindSafeTiles()
-    dir = choice(dirs) if len(dirs) > 0 else 'up'
+    dir = boardParser.FindSafeTiles()
+    #dir = choice(dirs) if len(dirs) > 0 else 'up'
 
     print('='* 30)
+    print('Turn: ' + str(req['turn']))
     print(playerSnake['name'])
-    print('Available directions: ' + ' '.join(dirs))
-    print('Chosen direction: ' + dir)
+    #print('Available directions: ' + ' '.join(dirs))
+    print('Chosen direction: ', dir)
     print(boardParser.board)
     print('='* 30)
     return {

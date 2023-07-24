@@ -11,6 +11,7 @@ class Board:
     def GetCoord(self,coord:Coord):
         x = coord.x
         y = coord.y
+        self.board[y][x].name = coord.name
         return self.board[y][x]
 
     def __str__(self) -> str:

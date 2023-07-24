@@ -21,10 +21,18 @@ class Tile(Coord):
         self.section = None
         self.value = value
         self.section = ''
-        self.render = Tile.icons[value]
+        self.danger = 0
+
+    @property
+    def render(self):
+        return Tile.icons[self.value]
+
+    @property
+    def coord(self):
+        return Coord(self.x,self.y)
 
     def __str__(self) -> str:
-        return f'{Tile.types[self.value]} tile at ({self.x},{self.y})'
+        return f'{Tile.types[self.value]} tile at ({self.x},{self.y}) Danger: {self.danger}'
 
     def __repr__(self) -> str:
         return str(self)

@@ -46,7 +46,7 @@ class SectionFinder():
 
     # Find adjancent tiles that are not walls or snakes
     def GetConnectedTiles(self,tile:Tile):
-        tiles = [self.__board.GetCoord(t) for t in tile.Sides() if self.__board.GetCoord(t).value not in [1,2]]
+        tiles = [self.__board.GetCoord(t) for t in tile.Sides if self.__board.GetCoord(t).value not in [1,2]]
         return tiles
 
     # Prints tiles numbered by section to make debugging easier

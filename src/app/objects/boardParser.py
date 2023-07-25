@@ -22,6 +22,7 @@ class Parser:
         # Populate board
         self.GetFood()
         self.GetSnakes()
+        self.SnakeTails()
         self.DangerousTiles()
 
         # Splits board sections
@@ -37,6 +38,18 @@ class Parser:
     @property
     def board(self):
         return self.__board
+
+    # Generates initial board array
+    def GenBoardArr(self) -> list:
+        board = [[Tile(x,y,0) for x in range(11)] for y in range(11)]
+        return board
+
+    # Find all food tiles
+    def GetFood(self) -> None:
+        for food in self.__boardData['food']:
+            coord = Coord(food['x'],food['y'])
+            self.__board.GetCoord(coord).value =  3
+
 
     # Find all snake tiles
     def GetSnakes(self) -> None:
@@ -54,7 +67,20 @@ class Parser:
                 head = s['head']
                 headCoord = Tile(head['x'], head['y'], 1)
                 for s in headCoord.Sides:
-                    self.__board.GetCoord(s).value = 1
+                    tile = self.__board.GetCoord(s)
+                    # If a food is near an enemy snake's head, consider as inaccessible
+                    # Chances are that the enemy will move into that tile
+                    if tile.value == 3:
+                        tile.value = 2
+                    tile.value = 1
+
+    # Remove Snake's tails
+    def SnakeTails(self):
+        for snake in self.__boardData['snakes']:
+            if snake['length'] > 2:
+                tail = snake['body'][-1]
+                tailCoord = Coord(tail['x'],tail['y'])
+                self.__board.GetCoord(tailCoord).value = 0
 
     # Sets areas that the snake cant fit as dangerous
     def SmallAreas(self) -> None:
@@ -64,17 +90,6 @@ class Parser:
             if(sectionSize < snakeLen):
                 for tile in self.__sections[key]:
                     self.__board.GetCoord(tile).value = 1
-
-    # Find all food tiles
-    def GetFood(self) -> None:
-        for food in self.__boardData['food']:
-            coord = Coord(food['x'],food['y'])
-            self.__board.GetCoord(coord).value =  3
-
-    # Generates initial board array
-    def GenBoardArr(self) -> list:
-        board = [[Tile(x,y,0) for x in range(11)] for y in range(11)]
-        return board
 
     # Searches for the best tile to move to
     def FindSafeTiles(self) -> str:

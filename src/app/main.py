@@ -14,14 +14,12 @@ def read_root():
       'color': '#950aff',
       'head': 'caffeine',
       'tail': 'rbc-necktie',
-      'version': '0.0.1-beta'
+      'version': '0.0.1'
     }
 
 @app.post('/start')
 def start():
-    print('='* 30)
-    print('NEW GAME STARTED')
-    print('='* 30)
+    print('=' * 30 + '\nNew Game Started\n' + '=' * 30)
 
 @app.post('/end')
 def end():
@@ -34,14 +32,8 @@ def move(req: dict):
     boardParser = Parser(req['board'],playerSnake)
 
     dir = boardParser.FindSafeTiles()
-    #dir = choice(dirs) if len(dirs) > 0 else 'up'
 
-    print('='* 30)
-    print('Turn: ' + str(req['turn']))
-    print(playerSnake['name'])
-    #print('Available directions: ' + ' '.join(dirs))
-    print('Chosen direction: ', dir)
-    print(boardParser.board)
+    print(f'Turn: {req["turn"]}\n{playerSnake["name"]}\nChosen direction: {dir}\n{boardParser.board}')
     print('='* 30)
     return {
         'move': dir,

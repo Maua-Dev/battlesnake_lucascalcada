@@ -11,18 +11,16 @@ class Tile(Coord):
     # Used for console debugging
     icons = [
         "▫",
-        "\u001b[33m▧\033[1;37m",
-        "\u001b[31m■\033[1;37m",
-        "\u001b[32m●\033[1;37m"
+        "▧",
+        "■",
+        "●"
     ]
 
     def __init__(self,x:int,y:int,value:int):
         super().__init__(x,y)
         self.section = None
         self.value = value
-        #self.tilType = tType
         self.section = ''
-        self.score = 0
 
     @property
     def render(self):

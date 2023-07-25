@@ -1,5 +1,5 @@
 from src.app.main import read_root, move
-
+from src.app.objects.boardSections import SectionFinder
 
 class Test_App:
     def test_read_root(self):
@@ -11,7 +11,7 @@ class Test_App:
             "color": "#950aff",
             "head": "caffeine",
             "tail": "rbc-necktie",
-            "version": "0.0.1-beta"
+            "version": "1.0"
         }
 
     def test_move(self):

@@ -77,7 +77,7 @@ class Parser:
     # Remove Snake's tails
     def SnakeTails(self):
         for snake in self.__boardData['snakes']:
-            if snake['length'] > 2:
+            if snake['length'] > 3:
                 tail = snake['body'][-1]
                 tailCoord = Coord(tail['x'],tail['y'])
                 self.__board.GetCoord(tailCoord).value = 0

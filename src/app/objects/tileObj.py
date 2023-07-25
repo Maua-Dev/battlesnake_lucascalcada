@@ -20,8 +20,9 @@ class Tile(Coord):
         super().__init__(x,y)
         self.section = None
         self.value = value
+        #self.tilType = tType
         self.section = ''
-        self.danger = 0
+        self.score = 0
 
     @property
     def render(self):
@@ -32,9 +33,7 @@ class Tile(Coord):
         return Coord(self.x,self.y)
 
     def __str__(self) -> str:
-        return f'{Tile.types[self.value]} tile at ({self.x},{self.y}) Danger: {self.danger}'
+        return f'{Tile.types[self.value]} tile at ({self.x},{self.y})'
 
     def __repr__(self) -> str:
         return str(self)
-
-

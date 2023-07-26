@@ -14,7 +14,7 @@ def read_root():
       'color': '#950aff',
       'head': 'caffeine',
       'tail': 'rbc-necktie',
-      'version': '1.0'
+      'version': '1.0-final'
     }
 
 @app.post('/start')

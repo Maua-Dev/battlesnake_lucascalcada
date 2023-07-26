@@ -29,7 +29,7 @@ class SectionFinder():
     # Splits the board into sections
     def FindSections(self):
         for tile in self.__boardTiles:
-            if(tile.value in (1,2)): 
+            if(tile.value  == 2): 
                 del self.sections[tile.section]
                 tile.section = -1
                 continue

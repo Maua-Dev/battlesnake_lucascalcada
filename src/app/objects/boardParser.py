@@ -104,7 +104,10 @@ class Parser:
         for direction in self.__headPos.Sides:
             val = self.__board.GetCoord(direction).value
             if(val == 0 or val == 3):
-                dirs.append(direction.name)
+                dirs.append(direction)
+        # If safe food tiles exist, only return them
+        if 3 in [d.value for d in dirs]:
+            dirs = [d.name for d in dirs if d.value == 3]
         return dirs
 
     # Find tile with largest area

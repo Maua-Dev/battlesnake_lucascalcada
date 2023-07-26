@@ -106,10 +106,9 @@ class Parser:
             if(val == 0 or val == 3):
                 dirs.append(direction)
         # If safe food tiles exist, only return them
-        dirs = []
         if 3 in [self.__board.GetCoord(d).value for d in dirs]:
-            dirs = [d.name for d in dirs if self.__board.GetCoord(d).value == 3]
-        return dirs
+            dirs = [d for d in dirs if self.__board.GetCoord(d).value == 3]
+        return [dir.name for dir in dirs]
 
     # Find tile with largest area
     def FindLargestArea(self):
